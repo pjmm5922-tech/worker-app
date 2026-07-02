@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>양정3구역 근로자 조회</title>
+
+<!-- ▼▼▼ 여기 한 줄만 본인 웹앱 주소로 바꾸면 됩니다 ▼▼▼ -->
+<script>
+  var APP_URL = "여기에_웹앱주소_붙여넣기";  // 예: https://script.google.com/macros/s/AKfy....../exec
+</script>
+<!-- ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲ -->
+
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#1e50c8">
+<style>
+  html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #1e50c8; }
+  #splash {
+    position: fixed; inset: 0; z-index: 10;
+    background: linear-gradient(160deg, #1e50c8, #142e73);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+    transition: opacity .4s; font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  }
+  #splash img { width: 110px; height: 110px; border-radius: 26px; box-shadow: 0 8px 30px rgba(0,0,0,.35); }
+  #splash .t { color: #fff; font-size: 20px; font-weight: 800; }
+  #splash .s { color: #b9ccf5; font-size: 13px; }
+  #splash.hide { opacity: 0; pointer-events: none; }
+  iframe { border: 0; width: 100%; height: 100%; display: block; }
+</style>
+</head>
+<body>
+  <div id="splash">
+    <img src="icon-192.png" alt="">
+    <div class="t">양정3구역 근로자 조회</div>
+    <div class="s">불러오는 중...</div>
+  </div>
+  <iframe id="app" allow="clipboard-write" onload="setTimeout(function(){document.getElementById('splash').classList.add('hide')}, 600)"></iframe>
+<script>
+  document.getElementById('app').src = APP_URL;
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+</script>
+</body>
+</html>
