@@ -98,7 +98,9 @@
   }
   .edubar.ok { background: #f0faf4; color: #0e9f4e; }
   .edubar.no { background: #fef2f3; color: #e0344a; }
+  .edubar.heat { background: #fff4e8; color: #c2620a; }
   .edubar .when { margin-left: auto; font-size: 12.5px; font-weight: 600; opacity: .8; }
+  .edubar + .edubar { margin-top: 8px; }
   .tapmore { text-align: center; font-size: 12px; color: #b6bdcf; padding: 0 0 13px; font-weight: 600; }
   .card.open .tapmore { display: none; }
 
@@ -262,6 +264,9 @@ function render(res) {
     var edubar = p.eduDone
       ? '<div class="edubar ok">🎓 신규교육 이수 완료' + (p.eduWhen ? '<span class="when">' + esc(p.eduWhen) + '</span>' : '') + '</div>'
       : '<div class="edubar no">🚨 교육 이력 없음 · 신규교육 필요</div>';
+    if (p.heat) {
+      edubar += '<div class="edubar heat">🔥 열순응 대상 · ' + esc(p.heat.status) + '</div>';
+    }
     var meta = [p.company, p.trade].filter(Boolean).join(' · ')
       + (p.age ? ' · 만 ' + p.age + '세' : '');
     var initial = esc(p.name.charAt(0));
@@ -285,6 +290,13 @@ function render(res) {
       item('신규교육', p.eduDone ? '이수 완료' + (p.eduWhen ? ' (' + p.eduWhen + ')' : '') : '이력 없음')
       + item('기초안전교육', p.eduDate)
       + item('교육기관', p.eduOrg);
+    var heat = '';
+    if (p.heat) {
+      heat = item('상태', p.heat.status)
+        + item('적용 기간', p.heat.period)
+        + item('근무시간 계획', p.heat.schedule)
+        + item('명단 채용일', p.heat.hire);
+    }
     var health =
       item('혈압', p.bp)
       + item('기저질환', p.disease)
@@ -309,6 +321,7 @@ function render(res) {
       + '<div class="detail">'
       +   (basic  ? '<div class="sec"><h3>👤 기본 정보</h3>' + basic + '</div>' : '')
       +   (edu    ? '<div class="sec"><h3>📋 교육</h3>' + edu + '</div>' : '')
+      +   (heat   ? '<div class="sec"><h3>🔥 열순응</h3>' + heat + '</div>' : '')
       +   (health ? '<div class="sec"><h3>🏥 건강 · 검진</h3>' + health + '</div>' : '')
       +   callbtns
       +   '<div class="src">출처: ' + esc((p.sources || []).join(', ')) + '</div>'
