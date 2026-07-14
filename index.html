@@ -100,7 +100,6 @@
   .edubar.no { background: #fef2f3; color: #e0344a; }
   .edubar.heat { background: #fff4e8; color: #c2620a; }
   .edubar .when { margin-left: auto; font-size: 12.5px; font-weight: 600; opacity: .8; }
-  .edubar + .edubar { margin-top: 8px; }
   .tapmore { text-align: center; font-size: 12px; color: #b6bdcf; padding: 0 0 13px; font-weight: 600; }
   .card.open .tapmore { display: none; }
 
@@ -167,9 +166,9 @@
 <div class="topbar">
   <div class="wrap">
     <div class="brand"><img src="icon-192.png" alt=""><h1>양정3구역 근로자 조회</h1></div>
-    <div class="subtitle">이름 검색 · 인적사항 · 신규교육 이수 확인</div>
+    <div class="subtitle">이름 또는 생년월일 검색 · 교육 · 열순응 확인</div>
     <div class="searchbar">
-      <input id="q" type="search" placeholder="이름 입력 (2글자 이상)" autocomplete="off">
+      <input id="q" type="search" placeholder="이름 또는 생년월일 (990401)" autocomplete="off">
       <button onclick="doSearch()">검색</button>
     </div>
   </div>
@@ -227,7 +226,7 @@ function jsonpSearch(q, pin, onOk, onErr) {
 
 function doSearch() {
   var q = document.getElementById('q').value.trim();
-  if (q.replace(/\s+/g,'').length < 2) { alert('이름을 2글자 이상 입력하세요.'); return; }
+  if (q.replace(/\s+/g,'').length < 2) { alert('이름 2글자 이상 또는 생년월일 6자리(예: 990401)를 입력하세요.'); return; }
   document.getElementById('results').innerHTML =
     '<div class="skel"><div class="l"></div><div class="l"></div><div class="l"></div></div>' +
     '<div class="skel"><div class="l"></div><div class="l"></div><div class="l"></div></div>';
