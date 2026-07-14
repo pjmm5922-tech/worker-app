@@ -184,6 +184,9 @@
 var PIN = localStorage.getItem('yj3_pin') || '';
 if (PIN) document.getElementById('pinView').style.display = 'none';
 
+// 앱을 여는 순간 서버 캐시를 미리 데워서 첫 검색을 빠르게 함
+fetch(APP_URL + '?warm=1', { redirect: 'follow' }).catch(function(){});
+
 function enterPin() {
   var v = document.getElementById('pinInput').value.trim();
   if (!v) return;
